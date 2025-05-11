@@ -1,12 +1,12 @@
 ---
-title: teeste
+title: ZKN BG
 emoji: 🐳
 colorFrom: purple
 colorTo: pink
 sdk: static
 pinned: false
 tags:
-  - deepsite
+  - ZKN BG
 ---
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+Check out the configuration reference at https://www.instagram.com/davizinzkn/
