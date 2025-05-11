@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zkn Magic BG Remove | Remoção Instantânea de Fundos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #6e8efb 0%, #4a6cf7 100%);
+        }
+        
+        .dropzone {
+            border: 2px dashed rgba(79, 70, 229, 0.3);
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .dropzone.active {
+            border-color: #4f46e5;
+            background-color: rgba(239, 242, 255, 0.5);
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.2);
+        }
+        
+        .loading-spinner {
+            animation: spin 1.5s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .result-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #6e8efb 0%, #4a6cf7 100%);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn-secondary {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.8) 100%);
+            animation: progress-animation 2s infinite;
+        }
+        
+        @keyframes progress-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <div class="inline-block gradient-bg text-white px-6 py-3 rounded-full mb-4 shadow-lg">
+                <span class="font-bold">NOVO</span> - Tecnologia Zkn AI
+            </div>
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">
+                <span class="gradient-text bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-blue-600">Zkn Magic BG Remove</span>
+            </h1>
+            <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                Remova fundos de imagens em segundos com nossa tecnologia avançada de IA. Perfeito para e-commerce, designers e redes sociais.
+            </p>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <div class="max-w-5xl mx-auto">
+                <!-- Upload Section -->
+                <div class="gradient-bg rounded-2xl shadow-xl overflow-hidden mb-8">
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-semibold text-white">
+                                <i class="fas fa-wand-magic-sparkles mr-3"></i> Remova o fundo agora
+                            </h2>
+                            <div class="text-white bg-white/20 px-3 py-1 rounded-full text-sm">
+                                <i class="fas fa-bolt mr-1"></i> 100% Automático
+                            </div>
+                        </div>
+                        
+                        <div id="dropzone" class="dropzone rounded-xl p-12 text-center cursor-pointer mb-6">
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mb-4 shadow-lg">
+                                    <i class="fas fa-cloud-upload-alt text-white text-3xl"></i>
+                                </div>
+                                <p class="text-white/90 text-lg mb-3 font-medium">Arraste e solte sua imagem aqui</p>
+                                <p class="text-white/70 mb-5">ou</p>
+                                <label for="fileInput" class="btn-secondary text-gray-800 px-8 py-3 rounded-xl font-medium cursor-pointer flex items-center">
+                                    <i class="fas fa-folder-open mr-2"></i> Selecione um arquivo
+                                </label>
+                                <input type="file" id="fileInput" accept="image/*" class="hidden">
+                            </div>
+                        </div>
+                        
+                        <div class="text-white/80 text-center text-sm">
+                            Formatos suportados: JPG, PNG, WEBP, GIF (Até 10MB)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Processing Section (Initially Hidden) -->
+                <div id="processingSection" class="hidden bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
+                    <div class="p-8">
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                            <div class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center mr-3 text-white">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            Processando sua imagem
+                        </h2>
+                        
+                        <div class="flex flex-col items-center justify-center py-10">
+                            <div class="loading-spinner text-5xl mb-6">
+                                <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center text-white">
+                                    <i class="fas fa-spinner"></i>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-6 text-lg">Analisando e removendo o fundo com Zkn AI...</p>
+                            
+                            <div class="w-full max-w-md">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-500">Progresso</span>
+                                    <span id="progressPercent" class="text-sm font-medium text-gray-500">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div id="progressBar" class="gradient-bg h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 text-gray-500 text-sm flex items-center">
+                                <i class="fas fa-info-circle mr-2"></i> Isso pode levar alguns segundos dependendo do tamanho da imagem
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Section (Initially Hidden) -->
+                <div id="resultsSection" class="hidden">
+                    <div class="result-card rounded-2xl overflow-hidden shadow-lg p-8 mb-8">
+                        <div class="flex items-center justify-between mb-8">
+                            <h2 class="text-2xl font-semibold text-gray-800 flex items-center">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3 text-green-600">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                Fundo removido com sucesso!
+                            </h2>
+                            <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                                <i class="fas fa-sparkles mr-1"></i> PRONTO
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+                            <!-- Original Image -->
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-medium text-gray-700">Original</h3>
+                                    <span class="text-sm text-gray-500" id="originalSize"></span>
+                                </div>
+                                <div class="bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
+                                    <img id="originalImage" src="" alt="Original image" class="w-full h-auto max-h-96 object-contain mx-auto p-4">
+                                </div>
+                            </div>
+                            
+                            <!-- Result Image -->
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-medium text-gray-700">Sem Fundo</h3>
+                                    <span class="text-sm text-gray-500" id="resultSize"></span>
+                                </div>
+                                <div class="bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
+                                    <img id="resultImage" src="" alt="Image with background removed" class="w-full h-auto max-h-96 object-contain mx-auto p-4">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-4 justify-center">
+                            <button id="downloadBtn" class="btn-primary text-white px-8 py-3 rounded-xl font-medium flex items-center">
+                                <i class="fas fa-download mr-2"></i> Baixar PNG
+                            </button>
+                            <button id="downloadJpgBtn" class="btn-secondary px-8 py-3 rounded-xl font-medium flex items-center">
+                                <i class="fas fa-download mr-2"></i> Baixar JPG
+                            </button>
+                            <button id="copyBtn" class="btn-secondary px-6 py-3 rounded-xl font-medium flex items-center">
+                                <i class="far fa-copy mr-2"></i> Copiar
+                            </button>
+                            <button id="newImageBtn" class="btn-secondary px-6 py-3 rounded-xl font-medium flex items-center">
+                                <i class="fas fa-redo mr-2"></i> Nova Imagem
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Editing Tools -->
+                    <div class="result-card rounded-2xl overflow-hidden shadow-lg p-8 mb-8">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                            <div class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center mr-3 text-white">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            Ferramentas de Edição
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+                                <h3 class="font-medium text-gray-700 mb-3 flex items-center">
+                                    <i class="fas fa-crop-alt text-indigo-500 mr-2"></i> Recortar
+                                </h3>
+                                <p class="text-gray-500 text-sm mb-4">Ajuste as bordas da sua imagem sem fundo</p>
+                                <button class="text-sm gradient-bg text-white px-4 py-2 rounded-lg w-full">
+                                    Editar Recorte
+                                </button>
+                            </div>
+                            
+                            <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+                                <h3 class="font-medium text-gray-700 mb-3 flex items-center">
+                                    <i class="fas fa-paint-brush text-indigo-500 mr-2"></i> Novo Fundo
+                                </h3>
+                                <p class="text-gray-500 text-sm mb-4">Adicione uma cor ou imagem como novo fundo</p>
+                                <button class="text-sm gradient-bg text-white px-4 py-2 rounded-lg w-full">
+                                    Alterar Fundo
+                                </button>
+                            </div>
+                            
+                            <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+                                <h3 class="font-medium text-gray-700 mb-3 flex items-center">
+                                    <i class="fas fa-ruler-combined text-indigo-500 mr-2"></i> Redimensionar
+                                </h3>
+                                <p class="text-gray-500 text-sm mb-4">Mude o tamanho para redes sociais ou impressão</p>
+                                <button class="text-sm gradient-bg text-white px-4 py-2 rounded-lg w-full">
+                                    Redimensionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Features Section -->
+        <section class="mt-20 mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-3">Tecnologia Zkn AI</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+                    Nossa inteligência artificial avançada detecta e remove fundos com precisão de pixels
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="feature-card p-8 rounded-2xl border border-gray-200/50">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center text-white text-2xl mb-5">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">IA Avançada</h3>
+                    <p class="text-gray-600 mb-4">
+                        Algoritmos de aprendizado profundo que identificam automaticamente o primeiro plano e fundo.
+                    </p>
+                    <div class="text-indigo-500 text-sm font-medium">
+                        <i class="fas fa-arrow-right mr-1"></i> Saiba mais
+                    </div>
+                </div>
+                
+                <div class="feature-card p-8 rounded-2xl border border-gray-200/50">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center text-white text-2xl mb-5">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Corte Preciso</h3>
+                    <p class="text-gray-600 mb-4">
+                        Detecção de bordas precisa mesmo em cabelos, pelos e objetos complexos.
+                    </p>
+                    <div class="text-indigo-500 text-sm font-medium">
+                        <i class="fas fa-arrow-right mr-1"></i> Saiba mais
+                    </div>
+                </div>
+                
+                <div class="feature-card p-8 rounded-2xl border border-gray-200/50">
+                    <div class="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center text-white text-2xl mb-5">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Privacidade</h3>
+                    <p class="text-gray-600 mb-4">
+                        Suas imagens são processadas localmente e nunca armazenadas em nossos servidores.
+                    </p>
+                    <div class="text-indigo-500 text-sm font-medium">
+                        <i class="fas fa-arrow-right mr-1"></i> Saiba mais
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="gradient-bg rounded-3xl p-12 text-white mb-16">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-2xl font-bold mb-2">O que nossos usuários dizem</h2>
+                <p class="text-white/80 mb-8">Milhares de profissionais confiam no Zkn Magic BG Remove</p>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white/10 p-6 rounded-xl backdrop-blur-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-xl mr-3">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Carlos Silva</h4>
+                                <p class="text-sm text-white/60">Fotógrafo Profissional</p>
+                            </div>
+                        </div>
+                        <p class="text-white/90">
+                            "Economizo horas de trabalho por semana com essa ferramenta. Os resultados são incríveis e consistentes."
+                        </p>
+                        <div class="flex mt-3">
+                            <i class="fas fa-star text-yellow-300 mr-1"></i>
+                            <i class="fas fa-star text-yellow-300 mr-1"></i>
+                            <i class="fas fa-star text-yellow-300 mr-1"></i>
+                            <i class="fas fa-star text-yellow-300 mr-1"></i>
+                            <i class="fas fa-star text-yellow-300"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white/10 p-6 rounded-xl backdrop-blur-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-xl mr-3">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Ana Oliveira</h4>
+                                <p class="text-sm text-white/60">Dono de E-commerce</p>
+                            </div>
+                        </div>
+                        <p class="text-white/90">
+                            "Perfeito para nossos produtos! Agora podemos criar imagens profissionais sem gastar com Photoshop."
+                        </p>
+                        <div class="flex mt-3">
+                            <i class="fas fa-star text-yellow-300 mr-1"></i>
+                            <i class="fas fa-star text-yellow-300 mr-1"></i>
+                            <i class="fas fa-star text-yellow-300 mr-1"></i>
+                            <i class="fas fa-star text-yellow-300 mr-1"></i>
+                            <i class="fas fa-star text-yellow-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Pronto para transformar suas imagens?</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-8 text-lg">
+                Experimente gratuitamente e veja a mágica acontecer em segundos
+            </p>
+            <button id="startAgainBtn" class="gradient-bg text-white px-10 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition">
+                <i class="fas fa-play mr-2"></i> Começar Agora
+            </button>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-8 border-t border-gray-200/50">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-gray-500 hover:text-indigo-500">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-indigo-500">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-indigo-500">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-indigo-500">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-6">
+                <a href="#" class="text-gray-500 hover:text-indigo-500 text-sm">Termos de Serviço</a>
+                <a href="#" class="text-gray-500 hover:text-indigo-500 text-sm">Política de Privacidade</a>
+                <a href="#" class="text-gray-500 hover:text-indigo-500 text-sm">Contato</a>
+                <a href="#" class="text-gray-500 hover:text-indigo-500 text-sm">API</a>
+                <a href="#" class="text-gray-500 hover:text-indigo-500 text-sm">Blog</a>
+            </div>
+            
+            <p class="text-gray-500 text-sm">
+                © 2023 Zkn Magic BG Remove. Todos os direitos reservados.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropzone = document.getElementById('dropzone');
+            const fileInput = document.getElementById('fileInput');
+            const processingSection = document.getElementById('processingSection');
+            const resultsSection = document.getElementById('resultsSection');
+            const originalImage = document.getElementById('originalImage');
+            const resultImage = document.getElementById('resultImage');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const downloadJpgBtn = document.getElementById('downloadJpgBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const newImageBtn = document.getElementById('newImageBtn');
+            const startAgainBtn = document.getElementById('startAgainBtn');
+            const progressBar = document.getElementById('progressBar');
+            const progressPercent = document.getElementById('progressPercent');
+            const originalSize = document.getElementById('originalSize');
+            const resultSize = document.getElementById('resultSize');
+
+            // Simulate background removal (in a real app, you would use an API)
+            function simulateBackgroundRemoval(file) {
+                return new Promise((resolve) => {
+                    // Show processing section
+                    processingSection.classList.remove('hidden');
+                    
+                    // Simulate progress
+                    let progress = 0;
+                    const interval = setInterval(() => {
+                        progress += 5 + Math.random() * 10;
+                        if (progress > 100) progress = 100;
+                        progressBar.style.width = `${progress}%`;
+                        progressPercent.textContent = `${progress}%`;
+                        
+                        if (progress === 100) {
+                            clearInterval(interval);
+                            
+                            // Create a canvas to simulate background removal
+                            const img = new Image();
+                            img.onload = function() {
+                                const canvas = document.createElement('canvas');
+                                canvas.width = img.width;
+                                canvas.height = img.height;
+                                const ctx = canvas.getContext('2d');
+                                ctx.drawImage(img, 0, 0);
+                                
+                                // Simple simulation - in reality you'd use a proper algorithm
+                                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                                const data = imageData.data;
+                                
+                                // Very basic "background removal" simulation
+                                for (let i = 0; i < data.length; i += 4) {
+                                    // Make pixels with high green component transparent
+                                    if (data[i+1] > data[i] && data[i+1] > data[i+2]) {
+                                        data[i+3] = 0;
+                                    }
+                                }
+                                
+                                ctx.putImageData(imageData, 0, 0);
+                                
+                                // Calculate sizes
+                                const originalSizeValue = (file.size / 1024).toFixed(1) + ' KB';
+                                const resultSizeValue = (canvas.toDataURL('image/png').length / 1024).toFixed(1) + ' KB';
+                                
+                                originalSize.textContent = originalSizeValue;
+                                resultSize.textContent = resultSizeValue;
+                                
+                                resolve({
+                                    pngUrl: canvas.toDataURL('image/png'),
+                                    jpgUrl: canvas.toDataURL('image/jpeg', 0.9)
+                                });
+                            };
+                            img.src = URL.createObjectURL(file);
+                        }
+                    }, 200);
+                });
+            }
+
+            // Handle file selection
+            function handleFile(file) {
+                if (!file.type.match('image.*')) {
+                    alert('Por favor, selecione um arquivo de imagem válido.');
+                    return;
+                }
+                
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('O arquivo é muito grande. O tamanho máximo é 10MB.');
+                    return;
+                }
+                
+                // Display original image
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    originalImage.src = e.target.result;
+                    
+                    // Process the image
+                    simulateBackgroundRemoval(file).then((result) => {
+                        processingSection.classList.add('hidden');
+                        resultsSection.classList.remove('hidden');
+                        resultImage.src = result.pngUrl;
+                        
+                        // Set up download buttons
+                        downloadBtn.onclick = function() {
+                            const a = document.createElement('a');
+                            a.href = result.pngUrl;
+                            a.download = 'zkn-bg-removed-' + file.name.replace(/\.[^/.]+$/, '') + '.png';
+                            a.click();
+                        };
+                        
+                        downloadJpgBtn.onclick = function() {
+                            const a = document.createElement('a');
+                            a.href = result.jpgUrl;
+                            a.download = 'zkn-bg-removed-' + file.name.replace(/\.[^/.]+$/, '') + '.jpg';
+                            a.click();
+                        };
+                        
+                        // Set up copy button
+                        copyBtn.onclick = function() {
+                            fetch(result.pngUrl)
+                                .then(res => res.blob())
+                                .then(blob => {
+                                    navigator.clipboard.write([
+                                        new ClipboardItem({
+                                            'image/png': blob
+                                        })
+                                    ]).then(() => {
+                                        // Show success message
+                                        const originalText = copyBtn.innerHTML;
+                                        copyBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Copiado!';
+                                        setTimeout(() => {
+                                            copyBtn.innerHTML = originalText;
+                                        }, 2000);
+                                    }).catch(err => {
+                                        console.error('Erro ao copiar:', err);
+                                        alert('Não foi possível copiar a imagem. Tente baixá-la.');
+                                    });
+                                });
+                        };
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // Drag and drop events
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropzone.addEventListener(eventName, preventDefaults, false);
+            });
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropzone.addEventListener(eventName, highlight, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropzone.addEventListener(eventName, unhighlight, false);
+            });
+
+            function highlight() {
+                dropzone.classList.add('active');
+            }
+
+            function unhighlight() {
+                dropzone.classList.remove('active');
+            }
+
+            dropzone.addEventListener('drop', handleDrop, false);
+
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const file = dt.files[0];
+                if (file) handleFile(file);
+            }
+
+            // File input change event
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files.length) {
+                    handleFile(fileInput.files[0]);
+                }
+            });
+
+            // New image button
+            newImageBtn.addEventListener('click', resetTool);
+            
+            // Start again button
+            startAgainBtn.addEventListener('click', resetTool);
+            
+            function resetTool() {
+                resultsSection.classList.add('hidden');
+                processingSection.classList.add('hidden');
+                fileInput.value = '';
+                progressBar.style.width = '0%';
+                progressPercent.textContent = '0%';
+                
+                // Scroll to upload section
+                document.querySelector('#dropzone').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=davizinzkn/teeste" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
